@@ -50,6 +50,7 @@ def kadane(arr):
 
 
 # 4.1 Prefix Sum bản Vét cạn - O(n^2)
+# Mở rộng thêm (không đưa vào thực nghiệm đồ thị)
 def prefix_sum_brute_force(arr):
    n = len(arr)
    P = [0] * (n + 1)
@@ -74,8 +75,9 @@ def prefix_sum_method(arr):
    return res
 
 # --- CHẠY THỬ NGHIỆM ---
-# Lưu ý: n không nên quá 2000 vì O(n^2) sẽ ảnh hưởng đến tốc độ chạy
-#sizes = [100, 300, 600, 1000, 1500, 2000]
+# Lưu ý: n càng lớn, thuật toán Brute Force càng ảnh hưởng đến tốc độ chạy
+# Có thẻ tăng giảm kích thước chạy
+# sizes = [100, 300, 600, 1000, 1500, 2000]
 sizes = [100, 500, 1000, 2000, 3000, 4000, 5000]
 data = { "Brute Force O(n^2)": [],
         "Divide & Conquer O(n log n)": [],
@@ -100,7 +102,7 @@ for n in sizes:
    s = time.time(); kadane(test_arr); data["Kadane O(n)"].append(time.time()-s)
   
    # 4.1 Đo Prefix Sum O(n^2)
-   s = time.time(); prefix_sum_brute_force(test_arr); data["Prefix Sum O(n^2)"].append(time.time()-s)
+   # s = time.time(); prefix_sum_brute_force(test_arr); data["Prefix Sum O(n^2)"].append(time.time()-s)
    
    # 4.2 Đo Prefix Sum O(n)
    s = time.time(); prefix_sum_method(test_arr); data["Prefix Sum O(n)"].append(time.time()-s)
@@ -111,7 +113,7 @@ for n in sizes:
 # --- VẼ ĐỒ THỊ ---
 plt.figure(figsize=(10, 6))
 plt.plot(sizes, data["Brute Force O(n^2)"], 'r-o', label="Brute Force (n^2)")
-plt.plot(sizes, data["Prefix Sum O(n^2)"], 'm-s', label="Prefix Sum (n^2)")
+#plt.plot(sizes, data["Prefix Sum O(n^2)"], 'm-s', label="Prefix Sum (n^2)")
 plt.plot(sizes, data["Prefix Sum O(n)"], 'y-s', label="Prefix Sum (n)")
 plt.plot(sizes, data["Divide & Conquer O(n log n)"], 'g-^', label="Divide & Conquer (n log n)")
 plt.plot(sizes, data["Kadane O(n)"], 'b-x', label="Kadane (n)")
